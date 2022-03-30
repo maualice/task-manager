@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getAllTasks} = require('../controllers/task')
+const {getAllTasks,createTask,getTask,updateTask,deleteTask} = require('../controllers/task')
 
 
 //  router.get('/',(req,res)=>{
@@ -8,6 +8,7 @@ const {getAllTasks} = require('../controllers/task')
 //     }) 
  
 //esta forma permite anidar
- router.route('/').get(getAllTasks)
+ router.route('/').get(getAllTasks).post(createTask)
+ router.route('/:id').get(getTask).patch(updateTask).delete(this.deleteTask)
 
 module.exports = router
