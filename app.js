@@ -1,18 +1,18 @@
-const express=require('express')
-const app = express()
-const tasks= require('./routes/task')
+const express = require('express');
+const app = express();
+const tasks = require('./routes/task');
+const connectDB = require('./db/connect');
+require('dotenv').config();
 
 //middleware
-
-
-
+app.use(express.json()); //sin eso no voy a tener los datos de req.body enviados en formato json
 
 //routes
-app.get('/hello',(req,res)=>{
-    res.send('Task Manager App');
-})
+app.get('/hello', (req, res) => {
+  res.send('Task Manager App');
+});
 
-app.use('/api/v1/tasks',tasks)
+app.use('/api/v1/tasks', tasks);
 
 //app.get('/api/v1/tasks')          -get all the tasks
 //app.post('/api/v1/tasks')         -create new task
@@ -22,6 +22,15 @@ app.use('/api/v1/tasks',tasks)
 
 //v1 es una convencion,indicando que esas son rutas de la api ,ya que puede que el servidor sirva otro tipo de recursos como index.html
 
-const port=3000
+const port = 300;
 
-app.listen(port,console.log(`server is listening on port ${port}...`))
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, console.log(`server is listening on port ${port}...`));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
