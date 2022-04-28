@@ -22,7 +22,7 @@ app.use('/api/v1/tasks', tasks);
 
 //v1 es una convencion,indicando que esas son rutas de la api ,ya que puede que el servidor sirva otro tipo de recursos como index.html
 
-const port = 300;
+const port = 3000;
 
 const start = async () => {
   try {
