@@ -5,12 +5,10 @@ const connectDB = require('./db/connect');
 require('dotenv').config();
 
 //middleware
+app.use(express.static('./public'));
 app.use(express.json()); //sin eso no voy a tener los datos de req.body enviados en formato json
 
 //routes
-app.get('/hello', (req, res) => {
-  res.send('Task Manager App');
-});
 
 app.use('/api/v1/tasks', tasks);
 
