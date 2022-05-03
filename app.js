@@ -3,6 +3,7 @@ const app = express();
 const tasks = require('./routes/task');
 const connectDB = require('./db/connect');
 require('dotenv').config();
+const notFound = require('./middleware/not-found');
 
 //middleware
 app.use(express.static('./public'));
@@ -19,6 +20,8 @@ app.use('/api/v1/tasks', tasks);
 //app.delete('/api/v1/tasks/:id')   -delete task
 
 //v1 es una convencion,indicando que esas son rutas de la api ,ya que puede que el servidor sirva otro tipo de recursos como index.html
+
+app.use(notFound); // send 404 if no other route matched
 
 const port = 3000;
 
