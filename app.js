@@ -4,6 +4,7 @@ const tasks = require('./routes/task');
 const connectDB = require('./db/connect');
 require('dotenv').config();
 const notFound = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 //middleware
 app.use(express.static('./public'));
@@ -22,6 +23,8 @@ app.use('/api/v1/tasks', tasks);
 //v1 es una convencion,indicando que esas son rutas de la api ,ya que puede que el servidor sirva otro tipo de recursos como index.html
 
 app.use(notFound); // send 404 if no other route matched
+
+app.use(errorHandlerMiddleware);
 
 const port = 3000;
 
